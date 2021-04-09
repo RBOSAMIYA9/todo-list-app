@@ -14,7 +14,7 @@ function App() {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState('');
-  const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+  // const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
 
   useEffect(() => {
     getTodoList();
