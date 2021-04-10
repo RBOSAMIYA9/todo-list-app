@@ -8,6 +8,7 @@ import { db , auth, provider } from "./firebase";
 
 function App() {
   // console.log("env",process.env.REACT_APP_MESSAGINGSENDERID,process.env.REACT_APP_NOT_SECRET_CODE);
+  
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
   const [getTask, setGetTask] = useState('');
   const [taskList, setTaskList] = useState([]);
@@ -16,10 +17,13 @@ function App() {
   const [editID, setEditID] = useState('');
   // const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
 
+  
   useEffect(() => {
     getTodoList();
+    // eslint-disable-next-line
   }, []); 
-
+  
+  
   const getTodoList = () => {
     if(user)
     {
@@ -49,6 +53,12 @@ function App() {
     //   );
     // });
   }
+
+ 
+
+  
+
+  
   
   const signOut = () => {
     auth.signOut().then(()=>{
