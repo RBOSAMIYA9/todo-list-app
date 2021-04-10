@@ -189,7 +189,7 @@ const signIn = () => {
                 onChange={(e) => setGetTask(e.target.value)}
               />
               <button type='submit' className='submit-btn'>
-                Add Task
+                submit
               </button>
             </div>
           </form>
