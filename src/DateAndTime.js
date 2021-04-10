@@ -10,7 +10,7 @@ function DateAndTime({activeTasks}) {
     var month = months[now.getMonth()];
     return ( <DateWithTime> 
                 <p>{day}, {month} {now.getDay()}</p>
-                <span> {activeTasks} active task</span>
+                <span><i className="fa fa-circle blink live"></i> {activeTasks} active task</span>
             </DateWithTime>
     )
 }
