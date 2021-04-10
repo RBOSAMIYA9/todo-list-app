@@ -17,7 +17,7 @@ function App() {
   const [editID, setEditID] = useState('');
   const [total, setTotal] = useState(0);
   const [completed, setCompleted] = useState(0);
-  const [incomplete, setInompleted] = useState(0);
+  
 
   // const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
   // const [displayContent, setListContent] = useState("")
@@ -35,6 +35,7 @@ function App() {
   useEffect(() => {
     getTodoList();
     completeTaskCalculator();
+    // eslint-disable-next-line
   }, []); 
 
   const getTodoList = () => {
