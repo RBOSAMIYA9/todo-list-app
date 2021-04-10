@@ -7,6 +7,7 @@ import { db , auth, provider } from "./firebase";
 
 
 function App() {
+  
   // console.log("env",process.env.REACT_APP_MESSAGINGSENDERID,process.env.REACT_APP_NOT_SECRET_CODE);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
   const [getTask, setGetTask] = useState('');
@@ -14,16 +15,35 @@ function App() {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState('');
-  // const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+  const [total, setTotal] = useState(0);
+  const [completed, setCompleted] = useState(0);
+  const [incomplete, setInompleted] = useState(0);
 
+  // const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+  // const [displayContent, setListContent] = useState("")
+
+  const completeTaskCalculator = () =>{
+
+    db.collection("todos").where("isCompleted", "==", true).onSnapshot(function (querySnapshot){
+      
+            // console.log("isCompleted true",querySnapshot.docs.length)
+            setCompleted(querySnapshot.docs.length);
+    }
+      
+    )
+  }
   useEffect(() => {
     getTodoList();
+    completeTaskCalculator();
   }, []); 
 
   const getTodoList = () => {
     if(user)
     {
       db.collection("todos").where("email", "==", user.email).onSnapshot(function (querySnapshot){
+        // console.log('total',querySnapshot.docs.length)
+        setTotal(querySnapshot.docs.length);
+
         setTaskList(
               querySnapshot.docs.map((doc) => ({
                 id: doc.id,
@@ -175,8 +195,8 @@ const signIn = () => {
           <div  className="todo-container">
             <HeadSection>
               <DateWithTime activeTasks={taskList.length}/>
-              <p className="task">Incomplete Task (3)</p>
-              <p className="task">Complete Task (5)</p>
+              <p className="task"  >Incomplete Task {total - completed}</p>
+              <p className="task" >completed Task {completed}</p>
             </HeadSection>
           <AddTaskSection>
           <form onSubmit={handleSubmit}>
@@ -189,10 +209,11 @@ const signIn = () => {
                 onChange={(e) => setGetTask(e.target.value)}
               />
               <button type='submit' className='submit-btn'>
-                submit
+                {isEditing? "Edit" : "submit"}
               </button>
             </div>
           </form>
+          
             </AddTaskSection>
             <hr/>
             <List taskList={taskList} deleteTask={deleteTask} taskCompleted={taskCompleted} editTask={editTask}/>
