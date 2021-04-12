@@ -24,7 +24,7 @@ function App() {
 
   const completeTaskCalculator = () =>{
 
-    db.collection("todos").where("isCompleted", "==", true).onSnapshot(function (querySnapshot){
+    db.collection("todos").where("isCompleted", "==", true).where("email", "==",user.email).onSnapshot(function (querySnapshot){
       
             // console.log("isCompleted true",querySnapshot.docs.length)
             setCompleted(querySnapshot.docs.length);

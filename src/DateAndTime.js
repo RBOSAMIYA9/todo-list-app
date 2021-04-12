@@ -9,7 +9,7 @@ function DateAndTime({activeTasks}) {
     var day = days[now.getDay()];
     var month = months[now.getMonth()];
     return ( <DateWithTime> 
-                <p>{day}, {month} {now.getDay()}</p>
+                <p>{day}, {month} {now.getDate()}</p>
                 <span><i className="fa fa-circle blink live"></i> {activeTasks} active task</span>
             </DateWithTime>
     )
