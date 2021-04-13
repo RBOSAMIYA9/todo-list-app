@@ -34,14 +34,16 @@ function App() {
   }
   useEffect(() => {
     getTodoList();
-    completeTaskCalculator();
-    // eslint-disable-next-line
+    if(user){
+      completeTaskCalculator();
+    }
+        // eslint-disable-next-line
   }, []); 
 
   const getTodoList = () => {
     if(user)
     {
-      db.collection("todos").where("email", "==", user.email).onSnapshot(function (querySnapshot){
+       db.collection("todos").where("email", "==", user.email).onSnapshot(function (querySnapshot){
         // console.log('total',querySnapshot.docs.length)
         setTotal(querySnapshot.docs.length);
 
